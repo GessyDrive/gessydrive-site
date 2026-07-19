@@ -193,11 +193,11 @@
             </label>
 
             <label for="telephone">Téléphone
-              <input id="telephone" name="telephone" type="tel" required autocomplete="tel">
+              <input id="telephone" name="telephone" type="tel" required autocomplete="tel" inputmode="tel">
             </label>
 
             <label for="email">E-mail
-              <input id="email" name="email" type="email" required autocomplete="email">
+              <input id="email" name="email" type="email" required autocomplete="email" inputmode="email">
             </label>
 
  <label for="objet" class="full">
@@ -355,8 +355,8 @@ required>
 </label>
             </label>
 
-            <label for="message" class="full">Message
-              <textarea id="message" name="message" required     placeholder="Merci de préciser :
+            <label for="message" class="full">Informations complémentaires
+              <textarea id="message" name="message" required aria-label="Informations complémentaires" required    placeholder="Merci de préciser :
 
 • Le modèle du véhicule
 
@@ -372,15 +372,23 @@ required>
             <input id="rgpd" name="rgpd" type="checkbox" required>
             <span>J’accepte le traitement de mes données dans le cadre de ma demande.</span>
           </label>
-
-          <label class="check" for="spam">
-            <input id="spam" name="spam" type="checkbox" required>
-            <span>Je confirme ne pas être un robot.</span>
-          </label>
+<!-- Honeypot anti-spam -->
+<div style="display:none;">
+    <label for="website">
+        Ne pas remplir ce champ
+        <input
+            type="text"
+            id="website"
+            name="website"
+            autocomplete="off"
+            tabindex="-1">
+    </label>
+</div>
+          
 
           <div class="actions">
-            <button class="btn btn-primary" type="submit">Confirmer l’envoi</button>
-            <a class="btn btn-secondary" href="index.html">Annuler</a>
+            <button class="btn btn-primary" type="submit" aria-label="Envoyer la demande de devis" ></button>
+            <a class="btn btn-secondary" href="index.html"> aria-label="Retour à l'accueil"</a>
           </div>
 
           <p class="status" id="formStatus" aria-live="polite"></p>
@@ -388,30 +396,129 @@ required>
       </section>
 
       <aside class="card">
-        <h2 style="margin-bottom:12px;color:var(--navy-deep);">Informations utiles</h2>
-        <div class="info-list">
-          <div class="info-item">Réponse rapide après réception du formulaire.</div>
-          <div class="info-item">Site statique gratuit sur Cloudflare Pages.</div>
-          <div class="info-item">Aucune base de données nécessaire.</div>
-          <div class="info-item">Protection anti-spam à ajouter ensuite si besoin.</div>
-        </div>
+    <h2 style="margin-bottom:12px;color:var(--navy-deep);">
+    Pourquoi choisir Gessy Drive ?
+</h2>
+
+<div class="info-list">
+
+    <div class="info-item">
+        ✅ Devis gratuit et sans engagement
+    </div>
+
+    <div class="info-item">
+        🚗 Convoyeurs professionnels et expérimentés
+    </div>
+
+    <div class="info-item">
+        🛡️ Véhicules assurés pendant toute la prestation
+    </div>
+
+    <div class="info-item">
+        📍 Convoyage partout en France
+    </div>
+
+    <div class="info-item">
+        ⏱️ Réponse sous 24 heures
+    </div>
+
+    <div class="info-item">
+        🤝 Service dédié aux particuliers et aux professionnels
+    </div>
+<hr style="margin:25px 0;border:none;border-top:1px solid var(--line);">
+
+<h2 style="margin-bottom:12px;color:var(--navy-deep);">
+    Contact
+</h2>
+
+<div class="info-list">
+
+    <div class="info-item">
+        📧 gessydrive.gd@gmail.com
+    </div>
+
+    <div class="info-item">
+        📞  06 18 80 51 68 ou 06 24 50 22 50
+    </div>
+
+</div>
+
+</div>
       </aside>
     </main>
 
-    <footer>
-      © Gessy Drive — Demande de devis.
-    </footer>
+<footer>
+
+<p>
+
+© 2026 Gessy Drive — Tous droits réservés
+
+</p>
+
+<p>
+
+<a href="mentions-legales.html">
+
+Mentions légales
+
+</a>
+
+</p>
+
+</footer>
   </div>
 
-  <script>
-    const form = document.getElementById('quoteForm');
-    const statusEl = document.getElementById('formStatus');
+ <script>
+const form = document.getElementById("quoteForm");
+const status = document.getElementById("formStatus");
 
-    form?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      statusEl.textContent = 'Votre demande a bien été préparée.';
-      form.reset();
-    });
-  </script>
+form.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    status.textContent = "Envoi en cours...";
+
+    const data = Object.fromEntries(new FormData(form));
+
+    try {
+
+        const response = await fetch("/submit", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify(data)
+
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+
+            status.textContent = "✅ Votre demande a été envoyée avec succès.";
+
+            form.reset();
+
+        } else {
+
+            status.textContent = "❌ Une erreur est survenue.";
+
+            console.error(result);
+
+        }
+
+    } catch (err) {
+
+        console.error(err);
+
+        status.textContent = "❌ Impossible de contacter le serveur.";
+
+    }
+
+});
+</script>
 </body>
 </html>
