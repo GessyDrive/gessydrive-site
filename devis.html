@@ -352,7 +352,6 @@ required>
 </select>
 
 </label>
-            </label>
 
             <label for="message" class="full">Informations complémentaires
               <textarea id="message" name="message" required aria-label="Informations complémentaires" required    placeholder="Merci de préciser :
@@ -468,6 +467,41 @@ Mentions légales
 
 </footer>
   </div>
+<script>
+document.getElementById("quoteForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
 
+    const form = e.target;
+    const status = document.getElementById("formStatus");
+
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    status.textContent = "Envoi en cours...";
+
+    try {
+        const response = await fetch("/api/submit", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            status.textContent = "✅ Votre demande a bien été envoyée.";
+            form.reset();
+        } else {
+            status.textContent = "❌ Erreur : impossible d'envoyer la demande.";
+            console.error(result);
+        }
+
+    } catch (err) {
+        console.error(err);
+        status.textContent = "❌ Une erreur est survenue.";
+    }
+});
+</script>
 </body>
 </html>

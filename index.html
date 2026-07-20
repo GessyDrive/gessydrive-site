@@ -429,11 +429,7 @@
     *{transition:none !important; animation:none !important; scroll-behavior:auto !important;}
   }
 </style>
-
 </head>
-<div style="background:red;color:white;padding:20px;text-align:center;font-size:24px;">
-TEST GESSYDRIVE 123
-</div>
 <body>
 
 <nav class="nav" id="nav">
@@ -605,32 +601,34 @@ TEST GESSYDRIVE 123
 Mentions légales
     </div>
     <span>Saint-Ouen · Paris · Île-de-France · France</span>
-  </footer>
+</footer>
 </div>
 
 <script>
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
-  }, {passive:true});
+  }, { passive: true });
 
   const revealEls = document.querySelectorAll('[data-reveal]');
   const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); } });
-  }, {threshold:0.15});
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
   revealEls.forEach(el => io.observe(el));
 
   const waypoints = document.querySelectorAll('.waypoint');
   const io2 = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); } });
-  }, {threshold:0.2});
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.2 });
   waypoints.forEach(el => io2.observe(el));
-<script>
-document.getElementById('quoteForm')?.addEventListener('submit', function(e){
-  e.preventDefault();
-  document.getElementById('formStatus').textContent = "Votre demande a bien été envoyée.";
-  this.reset();
-});
 </script>
 </body>
 </html>
