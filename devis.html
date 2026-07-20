@@ -322,7 +322,6 @@
             </label>
 
             <label for="vehicule" class="full">Type de véhicule
-            <label for="vehicule" class="full">
 
 Type de véhicule
 
@@ -387,8 +386,10 @@ required>
           
 
           <div class="actions">
-            <button class="btn btn-primary" type="submit" aria-label="Envoyer la demande de devis" ></button>
-            <a class="btn btn-secondary" href="index.html"> aria-label="Retour à l'accueil"</a>
+            <button class="btn btn-primary" type="submit" aria-label="Envoyer la demande de devis" > Envoyer ma demande </button>
+            <a href="index.html" class="btn btn-secondary" aria-label="Retour à l'accueil">
+    ← Retour à l'accueil
+</a>
           </div>
 
           <p class="status" id="formStatus" aria-live="polite"></p>
@@ -468,57 +469,5 @@ Mentions légales
 </footer>
   </div>
 
- <script>
-const form = document.getElementById("quoteForm");
-const status = document.getElementById("formStatus");
-
-form.addEventListener("submit", async (e) => {
-
-    e.preventDefault();
-
-    status.textContent = "Envoi en cours...";
-
-    const data = Object.fromEntries(new FormData(form));
-
-    try {
-
-        const response = await fetch("/submit", {
-
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify(data)
-
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-
-            status.textContent = "✅ Votre demande a été envoyée avec succès.";
-
-            form.reset();
-
-        } else {
-
-            status.textContent = "❌ Une erreur est survenue.";
-
-            console.error(result);
-
-        }
-
-    } catch (err) {
-
-        console.error(err);
-
-        status.textContent = "❌ Impossible de contacter le serveur.";
-
-    }
-
-});
-</script>
 </body>
 </html>
