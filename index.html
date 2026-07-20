@@ -625,7 +625,7 @@ Mentions légales
     entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); } });
   }, {threshold:0.2});
   waypoints.forEach(el => io2.observe(el));
-</script>
+<script>
 document.getElementById('quoteForm')?.addEventListener('submit', function(e){
   e.preventDefault();
   document.getElementById('formStatus').textContent = "Votre demande a bien été envoyée.";
