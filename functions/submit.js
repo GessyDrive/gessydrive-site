@@ -75,10 +75,8 @@ export async function onRequestPost(context) {
       })
     });
 
-const text = await response.text();
-console.log(text);
+const result = await resend.json();
 
-const result = JSON.parse(text);
     if (!resend.ok) {
       console.error(result);
 
