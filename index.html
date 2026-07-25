@@ -764,6 +764,14 @@ Mentions légales
     });
   }, { threshold: 0.2 });
   waypoints.forEach(el => io2.observe(el));
+// ===== MENU MOBILE =====
+
+const navToggle = document.getElementById("navToggle");
+const navLinks = document.querySelector(".nav__links");
+
+navToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+});
 </script>
 </body>
 </html>
