@@ -479,7 +479,7 @@ document.getElementById("quoteForm").addEventListener("submit", async function(e
     status.textContent = "Envoi en cours...";
 
     try {
-        const response = await fetch("/api/submit", {
+        const response = await fetch("/submit", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
