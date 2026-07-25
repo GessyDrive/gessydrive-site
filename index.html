@@ -162,6 +162,40 @@
     cursor:pointer;
 }
 
+/* ===== Sous-menu mobile ===== */
+
+.arrow{
+    transition:.3s;
+    display:inline-block;
+}
+
+.dropdown.open .arrow{
+    transform:rotate(180deg);
+}
+
+@media (max-width:900px){
+
+    .dropdown-content{
+
+        display:none;
+
+        position:static;
+
+        box-shadow:none;
+
+        background:transparent;
+
+        padding-left:18px;
+
+    }
+
+    .dropdown.open .dropdown-content{
+
+        display:block;
+
+    }
+
+}
 /* ===== Responsive ===== */
 
 @media (max-width: 900px){
@@ -175,7 +209,7 @@
     }
 
     .nav__links{
-        display:none;
+        display:flex;
         position:absolute;
         top:100%;
         left:0;
@@ -186,11 +220,19 @@
         padding:20px;
         box-shadow:0 12px 25px rgba(0,0,0,.12);
         z-index:999;
+
+          opacity:0;
+    visibility:hidden;
+    transform:translateY(-15px);
+
+    transition:all .35s ease;  
     }
 
-    .nav__links.active{
-        display:flex;
-    }
+.nav__links.active{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+}
 
     .nav__links a,
     .dropdown>a{
@@ -549,7 +591,9 @@
   <div class="nav__links">
 
   <div class="dropdown">
-    <a href="#">Services</a>
+<a href="#" id="servicesToggle">
+    Services <span class="arrow">▾</span>
+</a>
 
     <div class="dropdown-content">
       <a href="convoyage-particuliers.html">Convoyage particuliers</a>
@@ -764,13 +808,53 @@ Mentions légales
     });
   }, { threshold: 0.2 });
   waypoints.forEach(el => io2.observe(el));
+
 // ===== MENU MOBILE =====
 
 const navToggle = document.getElementById("navToggle");
 const navLinks = document.querySelector(".nav__links");
 
 navToggle.addEventListener("click", () => {
+
     navLinks.classList.toggle("active");
+
+    if(navLinks.classList.contains("active")){
+        navToggle.innerHTML = "✕";
+    }else{
+        navToggle.innerHTML = "☰";
+    }
+
+});
+
+// ===== SOUS MENU SERVICES =====
+
+const servicesToggle = document.getElementById("servicesToggle");
+
+const dropdown = document.querySelector(".dropdown");
+
+servicesToggle.addEventListener("click",(e)=>{
+
+    if(window.innerWidth<=900){
+
+        e.preventDefault();
+
+        dropdown.classList.toggle("open");
+
+    }
+
+});
+// ===== FERMETURE AUTOMATIQUE DU MENU =====
+
+document.querySelectorAll(".nav__links a").forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        navLinks.classList.remove("active");
+
+        navToggle.innerHTML = "☰";
+
+    });
+
 });
 </script>
 </body>
