@@ -162,40 +162,6 @@
     cursor:pointer;
 }
 
-/* ===== Sous-menu mobile ===== */
-
-.arrow{
-    transition:.3s;
-    display:inline-block;
-}
-
-.dropdown.open .arrow{
-    transform:rotate(180deg);
-}
-
-@media (max-width:900px){
-
-    .dropdown-content{
-
-        display:none;
-
-        position:static;
-
-        box-shadow:none;
-
-        background:transparent;
-
-        padding-left:18px;
-
-    }
-
-    .dropdown.open .dropdown-content{
-
-        display:block;
-
-    }
-
-}
 /* ===== Responsive ===== */
 
 @media (max-width: 900px){
@@ -427,6 +393,41 @@
     letter-spacing: inherit;
     text-transform: inherit;
 }
+/* ===== Sous-menu mobile ===== */
+
+.arrow{
+    transition:.3s;
+    display:inline-block;
+}
+
+.dropdown.open .arrow{
+    transform:rotate(180deg);
+}
+
+@media (max-width:900px){
+
+    .dropdown-content{
+
+        display:none;
+
+        position:static;
+
+        box-shadow:none;
+
+        background:transparent;
+
+        padding-left:18px;
+
+    }
+
+    .dropdown.open .dropdown-content{
+
+        display:block;
+
+    }
+
+}
+
   /* ---------- ZONE (radar) ---------- */
   .zone{
     background:var(--navy-deep);
